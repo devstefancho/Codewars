@@ -16,26 +16,7 @@ it may happen that the input string have leading, trailing whitespaces and more 
 Don't modify the input
 For C: The result is freed. */
 
-function orderWeight(strng) {
-  // #1.first condition : ordered by string
-  //console.log('input string: ',strng);
-  let strOrder = strng.split(' ').sort();
-  //console.log('strOrder: ', strOrder);
-  // #2.second condition: sum of  digits
-  function addDigit(str) {
-    return str.split('').map(str => parseInt(str)).reduce((acc, el)=> acc+el, 0);
-  }
-  let sumOfDigit = strOrder.map(num => { 
-    let arr = []; 
-    arr.push(num); 
-    arr.push(addDigit(num));
-    return arr;
-  })
-  //console.log('sumOfDigit: ', sumOfDigit);
-  
-  // need to write bubble Sort
-  // Reason: Node version8(codewars) has different algorithm compare to current Node
-  function bubbleSort(arr){
+function bubbleSort(arr) {
     let len = arr.length;
     for (let i = 0; i < (len - 1); i++) {
       for(let j = 0; j < (len - 1 - i); j++) {
@@ -48,11 +29,27 @@ function orderWeight(strng) {
     }
    return arr;
 }
- 
+
+// add digit // example: "20 12 13" => 45
+function addDigit(str) {
+  return str.split('').map(str => parseInt(str)).reduce((acc, el)=> acc+el, 0);
+}
+
+function orderWeight(strng) {
+  // split string and order
+  let strOrder = strng.split(' ').sort();
+  
+  // 2 dimensional array
+  let sumOfDigit = strOrder.map(num => { 
+    let arr = []; 
+    arr.push(num); 
+    arr.push(addDigit(num));
+    return arr;
+  })
+  
+  // need to write bubble Sort
+  // Reason: Node version8(codewars) has different algorithm compare to current Node
   bubbleSort(sumOfDigit);
-  //console.log('sumOfDigit: ', sumOfDigit);
-  //console.log('sorted sumOfDigit: ', sumOfDigit);
-  let result = sumOfDigit.map(num => num[0]).join(' ');
-  //console.log('result: ', result); 
-  return result;
+  
+  return sumOfDigit.map(num => num[0]).join(' ');
 }
