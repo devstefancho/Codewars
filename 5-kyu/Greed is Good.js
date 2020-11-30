@@ -33,13 +33,9 @@ function score( dice ) {
   console.log('dice:', dice)
   let result = dice.reduce((score, value)=> {
 
-    count[value] += 1;
+   count[value] += 1;
 
-    if(count[value] === 1){ 
-      if(value === 1) { score += 100; }
-      if(value === 5) { score += 50; }
-    }
-    else if(count[value] === 3) { 
+   if(count[value] === 3) { 
       if(value === 1){ score = score + 1000 - 100 - 100; }
       if(value === 2){ score += 200; }
       if(value === 3){ score += 300; }
