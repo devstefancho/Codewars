@@ -22,11 +22,11 @@ function solution(list){
     temp.push(list[i + 1]);
   }
 
-  result = result.reduce((acc, el) => {
+ let myResult = result.reduce((acc, el) => {
     if(el.length > 2) {return [...acc, `${el[0]}-${el[el.length - 1]}`]}
     if(el.length === 2) {return [...acc, ...el]}
     return [...acc, el]
   },[])
 
-  return result.join(',')
+  return myResult.join(',')
 }
