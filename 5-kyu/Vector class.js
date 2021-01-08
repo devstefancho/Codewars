@@ -20,53 +20,45 @@ Note: the test cases will utilize the user-provided equals method.
 *****/
 var Vector = function (components) {
   this.components = components;
-    const first = this.components;
+  const first = this.components;
   
+  this.getSecond = function(arry) {
+    if(first.length !== arry.components.length) throw Error('error');
+    return arry.components;
+  }
+
   this.add = function(arry) {
-    const second = arry.components;
-    if(first.length !== second.length) throw Error('error');
+    const second = this.getSecond(arry);
     const result = first.map((num, i) => (num + second[i]));
     return new Vector(result);
   }
+  
   this.subtract = function(arry) {
-    const second = arry.components;
-    if(first.length !== second.length) throw Error('error');
+    const second = this.getSecond(arry);
     const result = first.map((num, i) => (num - second[i]));
     return new Vector(result);
   }
+  
   this.dot = function(arry) {
-    const second = arry.components;
-    if(first.length !== second.length) throw Error('error');
+    const second = this.getSecond(arry);
     const result = first.reduce((acc, el, i) => (acc + el * second[i]), 0);
     return result;
   }
+  
   this.norm = function() {
-    //console.log(first)
     const result = first.reduce((acc, el) => (acc + Math.pow(el, 2)), 0);
-   // console.log(result)
-    console.log(`sqrt(${result})`); 
-    //return `sqrt(${result})`;
     return Math.sqrt(result);
   }
+  
   this.equals = function(test) {
     if(typeof first === 'object') {
-      console.log('object')
       const result = first.filter((num, i) => num !== test.components[i]);
       return result.length === 0;
     }
-    console.log(first, test.components)
-    if(typeof first === 'string') {
-      console.log('string', first)
-      console.log(Math.sqrt(first))
-      return Math.sqrt(first)
-      //return first === test.components ? first : false;
-    }
-    console.log('herer')
     return first === test.components ? first : false;
   }
+  
   this.toString = function() {
     return `(${first.join(',')})`
-    console.log(first)
   }
-  
 };
